@@ -1,1 +1,8 @@
-
+Dunder methods
+Numeric-like
+to-Compare
+Binary
+For built-in functions implementation
+Access-like
+Vector class implementation
+Price class discussion before the PaymentGateway implementation
