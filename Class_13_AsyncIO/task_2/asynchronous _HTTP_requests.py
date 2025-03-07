@@ -42,8 +42,14 @@ async def fetch_all(urls: List[str]) -> List[str]:
     Returns:
         List[str]: Список результатів (контент або помилки)
     """
-    tasks = [fetch_content(url) for url in urls]
-    return await asyncio.gather(*tasks)
+    tasks = [asyncio.create_task(fetch_content(url)) for url in urls]
+
+    results = []
+    for task in asyncio.as_completed(tasks):
+        result = await task
+        results.append(result)
+
+    return results
 
 
 # Використання
@@ -52,7 +58,7 @@ async def main():
         "https://www.example.com",
         "https://www.google.com",
         "https://nonexistent.com",  # не існуючий URL
-        "https://httpsbin.org/status/500"  # Повертає помилки 500
+        "https://httpbin.org/status/500"  # Повертає помилки 500
     ]
 
     results = await fetch_all(urls)
