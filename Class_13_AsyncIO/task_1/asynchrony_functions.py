@@ -5,34 +5,40 @@
 """
 
 import asyncio
+import asyncio
 import random
 
 
-async def download_page(url: str) -> None:
+async def download_page(url: str, semaphore) -> None:
     """
-    Асинхронна функція для симуляції завантаження сторінки від 1 - 5 секунд
+    Асинхронна функція для симуляції завантаження сторінки з обмеженням через semaphore.
     """
-    delay = random.uniform(1, 5)
-    await asyncio.sleep(delay)
-    print(f"Downloaded {url} in {delay:.2f} seconds")
+    async with semaphore:
+        delay = random.uniform(1, 5)
+        await asyncio.sleep(delay)
+        print(f"Downloaded {url} in {delay:.2f} seconds")
 
 
-async def main(urls: list[str]) -> None:
+async def main(urls: list[str], max_concurrent: int = 5) -> None:
     """
-    Основна асинхронна функція для паралельного завантаження списку URL.
+    Основна асинхронна функція для паралельного завантаження з обмеженням кількості одночасних запитів.
 
     Args:
         urls (list[str]): Список URL для завантаження
+        max_concurrent (int): Максимальна кількість одночасних завантажень (за замовчуванням 5)
     """
-    await asyncio.gather(*(download_page(url) for url in urls))
+    semaphore = asyncio.Semaphore(max_concurrent)
+    tasks = [asyncio.create_task(download_page(url, semaphore)) for url in urls]
+
+    for task in asyncio.as_completed(tasks):
+        await task  # Чекаємо завершення завдання
 
 
 if __name__ == "__main__":
-    # Використання
     sample_urls = [
-        "https://url_example.com",
-        "https://url_example.org",
-        "https://url_example.net",
-        "https://my_url.ua"
-    ]
-    asyncio.run(main(sample_urls))
+                      "https://url_example.com",
+                      "https://url_example.org",
+                      "https://url_example.net",
+                      "https://my_url.ua"
+                  ] * 3
+    asyncio.run(main(sample_urls, max_concurrent=5))
