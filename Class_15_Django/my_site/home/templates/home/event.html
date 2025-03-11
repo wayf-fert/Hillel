@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Подія {{ year }}-{{ month }}-{{ day }}</title>
-</head>
-<body>
-    <h1>Дата події: {{ year }}-{{ month }}-{{ day }}</h1>
-    <p>Опис події...</p>
-</body>
-</html>
+{% extends 'home/base.html' %}
+
+{% block title %}Подія {{ year }}-{{ month }}-{{ day }}{% endblock %}
+
+{% block content %}
+<h2>Дата події: {{ year }}-{{ month }}-{{ day }}</h2>
+<p>Опис події...</p>
+{% endblock %}

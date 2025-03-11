@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Профіль {{ username }}</title>
-</head>
-<body>
-    <h1>Профіль користувача: {{ username }}</h1>
-    <p>Це сторінка профілю користувача.</p>
-</body>
-</html>
+{% extends 'home/base.html' %}
+
+{% block title %}Профіль {{ username }}{% endblock %}
+
+{% block content %}
+<h2>Профіль користувача: {{ username }}</h2>
+<p>Це сторінка профілю користувача.</p>
+{% endblock %}

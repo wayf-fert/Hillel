@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Мій сайт{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Ласкаво просимо на мій сайт!</h1>
+        <nav>
+            <a href="{% url 'home' %}">Головна</a> |
+            <a href="{% url 'about' %}">Про нас</a> |
+            <a href="{% url 'contact' %}">Контакти</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Контент сторінки буде тут -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Мій сайт. Усі права захищені.</p>
+    </footer>
+</body>
+</html>

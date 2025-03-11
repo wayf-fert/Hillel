@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Контакти</title>
-</head>
-<body>
-    <h1>Зв'яжіться з нами</h1>
-    <p>Напишіть нам на пошту: fatherbot101@gmail.com</p>
-</body>
-</html>
+{% extends 'home/base.html' %}
+
+{% block title %}Контакти{% endblock %}
+
+{% block content %}
+<h1>Зв'яжіться зі мною</h1>
+<p>Напишіть мені на пошту: <a href="mailto:fatherbot101@gmail.com">fatherbot101@gmail.com</a></p>
+{% endblock %}

@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Про нас</title>
-</head>
-<body>
-    <h1>Сторінка про нас</h1>
-    <p>Радий, що вас закікавила моя сторінка!</p>
-</body>
-</html>
+{% extends 'home/base.html' %}
+
+{% block title %}Про мене{% endblock %}
+
+{% block content %}
+<h2>Хто я?</h2>
+<p>Студент школи Hillel, мої перші кроки у web-розробці!</p>
+{% endblock %}
